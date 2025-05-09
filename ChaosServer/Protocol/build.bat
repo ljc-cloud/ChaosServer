@@ -1,0 +1,1 @@
+protoc -I=./ --csharp_out=./ ./SocketProtocol.proto ./GameFrameSync.proto

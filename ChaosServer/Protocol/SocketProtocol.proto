@@ -1,0 +1,229 @@
+﻿syntax = "proto3";
+package SocketProtocol;
+
+enum RequestCode
+{
+	RequestNone = 0;
+	User = 1;
+	HeartBeat = 2;
+	Room = 3;
+	Game = 4;
+}
+
+enum ResponseCode
+{
+	ResponseNone = 0;
+	UserResponse = 1;
+	HeartBeatResponse = 2;
+	RoomResponse = 3;
+}
+
+enum ActionCode
+{
+	ActionNone = 0;
+	SignIn = 1;
+	SignUp = 2;
+	CreateRoom = 3;
+	SearchRoom = 4;
+	AssignClient = 5;
+	JoinRoom = 6;
+	PlayerReady = 7;
+	QuitRoom = 8;
+	StartGame = 9;
+	FinishOperation = 10;
+	ReadyStartGame = 11;
+	UpdatePlayerCoin = 12;
+	LoadGameSceneComplete = 13;
+	ChangeGameState = 14;
+	ChangeRound = 15;
+	ChangeOperation = 16;
+	SetGameOver = 17;
+	UpdateRecipe = 18;
+	DeliverRecipe = 19;
+}
+
+enum RoomVisibility
+{
+	None = 0;
+	Public = 1;
+	Private = 2;
+}
+
+enum ReturnCode
+{
+	ReturnNone = 0;
+	Success = 1;
+	Fail = 2;
+}
+
+enum GameState
+{
+	NotStarted = 0;
+	WaitingStart = 1;
+	CountdownToStart = 2;
+	GamePlaying = 3;
+	GameOver = 4;
+}
+
+message HeartbeatPack
+{
+	bool triggered = 1;
+	// PING 或 PONG
+	string type = 2;
+	// 时间戳
+	int64 timestamp = 3;
+}
+
+message MainPack
+{
+	HeartbeatPack heartbeat = 1;
+
+	RequestCode requestCode = 2;
+	ResponseCode responseCode = 3;
+	ActionCode actionCode = 4;
+	ReturnCode returnCode = 5;
+
+	SignInPack signInPack = 6;
+	SignUpPack signUpPack = 7;
+	PlayerInfoPack playerInfoPack = 8;
+
+	ReturnMessage returnMessage = 9;
+
+	ClientPack clientPack = 10;
+
+	CreateRoomPack createRoomPack = 11;
+	RoomInfoPack roomInfoPack = 13;
+	SearchRoomResultPack searchRoomResultPack = 14;
+	RoomPlayerReadyPack roomPlayerReadyPack = 15;
+	JoinRoomResultPack joinRoomResultPack = 16;
+	RoomPlayerInfoPack roomPlayerInfoPack = 17;
+
+	StartGameResultPack startGameResultPack = 18;
+	FinishOperationPack finishOperationPack = 19;
+	PlayerScoreBoardPack playerScoreBoardPack = 20;
+	RoundPack roundPack = 21;
+	ChangeOperationPack changeOperationPack = 22;
+	GameOverPack gameOverPack = 23;
+
+	GameState currentGameState = 24;
+	repeated int32 recipeIdArray = 25;
+	int32 deliverRecipeId = 26;
+}
+
+message PlayerCoinPack
+{
+	int32 coin = 1;
+}
+
+message SignInPack
+{
+	string username = 1;
+	string password = 2;
+}
+
+message SignUpPack
+{
+	string username = 1;
+	string password = 2;
+	string nickname = 3;
+}
+
+message CreateRoomPack
+{
+	string roomName = 2;
+	RoomVisibility roomVisibility = 3;
+	int32 maxPlayer = 4;
+}
+
+message RoomInfoPack
+{
+	string roomCode = 1;
+	string roomName = 2;
+	RoomVisibility roomVisibility = 3;
+	int32 currentPlayers = 4;
+	int32 maxPlayer = 5;
+}
+
+message SearchRoomResultPack
+{
+	repeated RoomInfoPack roomInfoList = 1;
+}
+
+message JoinRoomResultPack
+{
+	repeated RoomPlayerInfoPack roomPlayerInfoList = 1;
+}
+
+message RoomPlayerReadyPack
+{
+	bool ready = 1;
+}
+
+message PlayerInfoPack
+{
+	int32 id = 1;
+	string username = 2;
+	string nickname = 3;
+}
+message RoomPlayerInfoPack
+{
+	int32 id = 1;
+	string username = 2;
+	string nickname = 3;
+	bool ready = 4;
+}
+
+message StartGameResultPack
+{
+	int32 firstPlayerId = 1;
+}
+
+message FinishOperationPack
+{
+	repeated int32 totalScore = 1;
+	int32 operationLeft = 2;
+}
+
+message ChangeOperationPack
+{
+	int32 currentOperationPlayerId = 1;
+	int32 operationLeft = 2;
+}
+
+message PlayerScoreBoardPack
+{
+	int32 playerId = 1;
+	int32 operationLeft = 2;
+	repeated int32 scoreArray = 3;
+}
+
+message RoundPack
+{
+	int32 currentRound = 1;
+	int32 operationPlayerId = 2;
+	string message = 3;
+}
+
+message GameOverPack
+{
+	repeated PlayerScorePack playerScorePack = 1;
+}
+
+message PlayerScorePack
+{
+	int32 playerId = 1;
+	repeated int32 scoreArray = 2;
+}
+
+message ClientPack
+{
+	int32 clientId = 1;
+	//	string clientIp = 2;
+	int32 udpListenPort = 3;
+}
+
+message ReturnMessage
+{
+	string errorMessage = 1;
+	string successMessage = 2;
+}

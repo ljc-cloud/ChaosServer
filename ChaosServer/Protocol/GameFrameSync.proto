@@ -1,0 +1,75 @@
+﻿syntax = "proto3";
+package GameFrameSync;
+
+enum InputType
+{
+  None = 0;
+  MoveLeft = 1;
+  MoveRight = 2;
+  Ready = 3;
+  QuitReady = 4;
+  Shoot = 5;
+  Move = 6;
+  Interact = 7;
+  InteractAlt = 8;
+}
+
+enum MessageType
+{
+  FrameSync = 0;
+  ACK = 2;
+}
+
+message ReqFrameInputData
+{
+  int32 frameId = 1;
+  int32 playerId = 2;
+  InputType inputType = 3;
+  Vector2D position = 4;
+  float force = 5;
+  float arrowRotationZ = 6;
+  Vector2D shootDirection = 7;
+  Vector2D moveVector = 8;
+  int32 index = 9;
+  int32 interactCounter = 10;
+}
+
+message FrameInputData
+{
+  int32 frameId = 1;
+  int32 playerId = 2;
+  InputType inputType = 3;
+  Vector2D position = 4;
+  float force = 5;
+  float arrowRotationZ = 6;
+  Vector2D shootDirection = 7;
+  Vector2D moveVector = 8;
+  int32 index = 9;
+  int32 interactCounter = 10;
+}
+message MessageHead
+{
+  int32 index = 1;
+  bool ack = 2;
+}
+message Vector3D
+{
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+message Vector2D
+{
+  float x = 1;
+  float y = 2;
+}
+
+message ResFrameSyncData
+{
+  int32 frameId = 1;
+  repeated FrameInputData playersFrameInputData = 2;
+  ReqFrameInputData reqFrameInputData = 3;
+  MessageHead messageHead = 5;
+  MessageType messageType = 6;
+  string roomCode = 7;
+}
