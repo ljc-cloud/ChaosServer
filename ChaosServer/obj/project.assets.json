@@ -2400,11 +2400,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\code\\ChaosServer\\ChaosServer\\ChaosServer.csproj",
+      "projectUniqueName": "E:\\git-project\\C#\\ChaosServer\\ChaosServer\\ChaosServer.csproj",
       "projectName": "ChaosServer",
-      "projectPath": "E:\\code\\ChaosServer\\ChaosServer\\ChaosServer.csproj",
+      "projectPath": "E:\\git-project\\C#\\ChaosServer\\ChaosServer\\ChaosServer.csproj",
       "packagesPath": "C:\\Users\\_LJC\\.nuget\\packages\\",
-      "outputPath": "E:\\code\\ChaosServer\\ChaosServer\\obj\\",
+      "outputPath": "E:\\git-project\\C#\\ChaosServer\\ChaosServer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\_LJC\\AppData\\Roaming\\NuGet\\NuGet.Config",

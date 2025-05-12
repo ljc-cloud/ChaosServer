@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "INaZTCmpvk4=",
+  "dgSpecHash": "H+pzkxMme9o=",
   "success": true,
-  "projectFilePath": "E:\\code\\ChaosServer\\ChaosServer\\ChaosServer.csproj",
+  "projectFilePath": "E:\\git-project\\C#\\ChaosServer\\ChaosServer\\ChaosServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\_LJC\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
     "C:\\Users\\_LJC\\.nuget\\packages\\google.protobuf\\3.29.3\\google.protobuf.3.29.3.nupkg.sha512",
